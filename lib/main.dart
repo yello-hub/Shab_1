@@ -6,7 +6,7 @@ import 'screens/splash_screen.dart';
 void main() {
   runApp(MaterialApp(
     title: 'Named routes Demo',
-    initialRoute: '/',
+    initialRoute: '/first',
     routes: {
       '/': (context) => SplashScreen(),
       '/first': (context) => FirstScreen(),
