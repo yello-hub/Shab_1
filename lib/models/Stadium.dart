@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:async';
 
 class Stadium {
   final int id;
@@ -15,15 +16,11 @@ class Stadium {
   });
 
   static Future<List<Stadium>> fetchStadiums() async {
-
-
     //요청주소
     String url = "https://plabfootball.com/api/v2/stadium-groups/";
 
     //요청 조건을 보낼 때
-    Map<String, String> headers = {
-
-    };
+    Map<String, String> headers = {};
 
     //응답
     final response = await http.get(url, headers: headers);
@@ -41,15 +38,14 @@ class Stadium {
       List list = obj['results'];
       print(list);
 
-      //list to model 
-      var stadiumList = list.map((element) => Stadium.fromJson(element)).toList();
-      
+      //list to model
+      var stadiumList =
+          list.map((element) => Stadium.fromJson(element)).toList();
+
       //응답
       return stadiumList;
-
     }
   }
-
 
   factory Stadium.fromJson(Map<String, dynamic> json) {
     return Stadium(
