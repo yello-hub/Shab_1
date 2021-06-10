@@ -19,9 +19,9 @@ class DetailScreen extends StatelessWidget {
   }
 }
 
-class Stadium {
-  final int id;
-  final String name;
-
-  Stadium(this.id, this.name);
-}
+// class Stadium {
+//   final int id;
+//   final String name;
+//
+//   Stadium(this.id, this.name);
+// }
