@@ -1,7 +1,18 @@
+ onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailScreen(snapshot.data[index])));
+
+
+
+
+
+
 // import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shab/screens/detail_screen.dart';
-// import 'package:shab/screens/detail_screen.dart';
 import '../models/Stadium.dart';
 
 class FirstScreen extends StatelessWidget {
@@ -14,6 +25,14 @@ class FirstScreen extends StatelessWidget {
         title:
             Image.asset('assets/images/Asset_15.png', height: 100, width: 100),
       ),
+      // body: Center(
+      //     child: ElevatedButton(
+      //         child: Text('Launch screen'),
+      //         onPressed: () {
+      //           new Future.delayed(const Duration(seconds: 3), () {
+      //             Navigator.pushNamed(context, '/detail');
+      //           });
+      //         })),
       body: MainListExample(),
     );
   }
@@ -42,32 +61,33 @@ class _MainListState extends State<MainListExample> {
                 child: ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
-                print(stadium);
+               print(stadium);
 
-                // return ListView(children: <Widget>[
-                //new Container(
-                //  decoration: new BoxDecoration(color: Colors.black),
-                //   child: new
-                return ListTile(
-                    contentPadding: EdgeInsets.all(100.0),
-                    title: Text("s"),
-                    // title: Image.network(
-                    //   '${snapshot.data[index].cover}',
-                    //   fit: BoxFit.fill,
-                    // ),
-                    subtitle: Text('${snapshot.data[index].name}'),
-                    onTap: () {
+  
+                   // return _buildImageColumn();
+              },
+                    ));
+          }  } else if (snapshot.hasData) {
+            return Text("$snapshot.error}");
+          }
+
+          Widget _buildImageColumn() => Container(
+            decoration: BoxDecoration(
+              color: Colors.blue[50]
+            ),
+            margin: const EdgeInsets.all(8),
+            child: Column(children: <Widget>[
+            
+              ListTile(title: Text('${snapshot.data[index].name}'),
+              onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  DetailScreen(snapshot.data[index])));
-                    });
-              },
-            ));
-          } else if (snapshot.hasData) {
-            return Text("$snapshot.error}");
-          }
+                                  DetailScreen(snapshot.data[index])))};),
+            ]
+            ),
+          );
           //응답 받은 데이터로 UI 그리기
 
           return CircularProgressIndicator();

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'screens/first_screen.dart';
-import 'screens/detail_screen.dart';
+//import 'screens/detail_screen.dart';
 import 'screens/splash_screen.dart';
 
-
 // 오류를 수정하고 푸시 해야지ㅋㅋ
-// 몇가지 
+// 몇가지
 
 /*
 
@@ -17,8 +16,9 @@ import 'screens/splash_screen.dart';
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     title: 'Named routes Demo',
-    initialRoute: '/first',
+    initialRoute: '/',
     routes: {
       '/': (context) => SplashScreen(),
       '/first': (context) => FirstScreen(),

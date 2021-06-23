@@ -4,16 +4,20 @@ import 'dart:async';
 
 class Stadium {
   final int id;
-  final String name;
-  final int size_x;
-  final int size_y;
-  final String cover;
+  final String tag;
+  final int date;
+  final int like;
 
-  Stadium({this.id, this.name, this.size_x, this.size_y, this.cover});
+  Stadium({
+    this.id,
+    this.tag,
+    this.date,
+    this.like,
+  });
 
   static Future<List<Stadium>> fetchStadiums() async {
     //요청주소
-    String url = "https://plabfootball.com/api/v2/stadium-groups/";
+    String url = "http://www.letsego.site/api/v1/insta-post/";
 
     //요청 조건을 보낼 때
     Map<String, String> headers = {};
@@ -45,10 +49,10 @@ class Stadium {
 
   factory Stadium.fromJson(Map<String, dynamic> json) {
     return Stadium(
-        id: json['id'],
-        name: (json['name'] == null) ? "-" : json['name'],
-        size_x: json['size_x'],
-        size_y: json['size_y'],
-        cover: json['stadium_cover']);
+      id: json['id'],
+      tag: (json['content'] == null) ? "-" : json['content'],
+      date: json['created_date'],
+      like: json['like_count'],
+    );
   }
 }

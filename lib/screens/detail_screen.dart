@@ -10,7 +10,9 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(stadium.name),
+        toolbarHeight: 150,
+        backgroundColor: Colors.lightGreen[900],
+        title: Image.asset('assets/images/Hash.png', height: 100, width: 100),
       ),
       body: Container(
         child: Text(stadium.name),
