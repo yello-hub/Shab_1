@@ -4,26 +4,18 @@ import 'dart:async';
 
 class Instagram {
   // final int id;
-  final String tag;
-  final String date;
-  final int like;
-  final int unlike;
-  final String url;
-  final String category;
+  final String pictures;
+  final String tags;
 
-  Instagram(
-      {
-      // this.id,
-      this.tag,
-      this.date,
-      this.like,
-      this.unlike,
-      this.url,
-      this.category});
+  final String domain;
+  final String title;
+  final String content;
+
+  Instagram({this.pictures, this.tags, this.domain, this.title, this.content});
 
   static Future<List<Instagram>> fetchInstagrams() async {
     //요청주소
-    String url = "http://www.letsego.site/api/v1/post-instagram/";
+    String url = "http://letsego.site/api/v1/hash-post/";
 
     //요청 조건을 보낼 때
     Map<String, String> headers = {};
@@ -55,12 +47,10 @@ class Instagram {
 
   factory Instagram.fromJson(Map<String, dynamic> json) {
     return Instagram(
-        // id: json['id'],
-        tag: (json['content'] == null) ? "-" : json['content'],
-        date: json['created_date'],
-        like: json['is_good_count'],
-        unlike: json['is_bad_count'],
-        url: json['url'],
-        category: json['category']);
+        pictures: json['pictures'],
+        tags: (json['content'] == null) ? "-" : json['content'],
+        domain: json['domain'],
+        title: json['title'],
+        content: json['content']);
   }
 }
