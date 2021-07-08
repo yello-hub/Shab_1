@@ -18,7 +18,7 @@ void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     title: 'Named routes Demo',
-    initialRoute: '/first',
+    initialRoute: '/',
     routes: {
       '/': (context) => SplashScreen(),
       '/first': (context) => FirstScreen(),
