@@ -51,6 +51,15 @@ class Instagram {
   // productList: list.map((element) => Product.fromJson(element)).toList(),
 
 
+  String getTitle() {
+    //return if (title == null) ? "-" : title;
+    return title == null ? "-" : title;
+  }
+
+  String getContent() {
+    return content == null ? "-" : content;
+  }
+
   String getDomain() {
     if (domain == 'instagram') {
       return "instar_logo.png";
@@ -76,22 +85,36 @@ class Instagram {
   }
 
   Widget getTagWidget() {
-    List<Text> tagList = List<Text>();
-    for (int i =0; i<tags.length; i++) {
-      tagList.add(Text(
-        'a',
-        style: TextStyle(
-          backgroundColor: Colors.blue
+    List<Container> tagList = List<Container>();
+    for (int i = 0; i<tags.length; i++) {
+      tagList.add(
+        Container(
+          //color: Color(0xFFFFE073),
+          decoration: BoxDecoration(
+            color: Color(0xFFFFE073),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          padding: EdgeInsets.all(5),
+          margin: EdgeInsets.only(left:2),
+          child: Text(
+            tags[i].tag,
+          ),
         ),
-      ));
+      );
     }
-    return Row(
+    //return Row(
+      //children: tagList,
+    //);
+    return Wrap(
       children: tagList,
-      // children: [
-      //   Text('a'),
-      //   Text('b'),
-      // ],
+      //spacing: 10,
+      runSpacing: 4,
     );
+
+    //return ListView(
+      //scrollDirection: Axis.horizontal,
+      //children: tagList,
+    //);
   }
 
   // Instagram({this.pictures, this.tags, this.domain, this.title, this.content});
@@ -99,7 +122,8 @@ class Instagram {
 
   static Future<List<Instagram>> fetchInstagrams() async {
     //요청주소
-    String url = "http://letsego.site/api/v1/hash-post/";
+    //String url = "http://letsego.site/api/v1/hash-post/";
+    String url = "http://letsego.site/api/v1/hash-post/?page=5";
 
     //요청 조건을 보낼 때
     Map<String, String> headers = {};

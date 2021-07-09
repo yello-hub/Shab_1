@@ -2,12 +2,15 @@
 import 'package:flutter/material.dart';
 import 'package:shab/screens/detail_screen.dart';
 import '../models/Instagram.dart';
+import 'package:flutter/services.dart';
 
 class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
     return Scaffold(
       appBar: AppBar(
+        brightness: Brightness.dark,
         toolbarHeight: 100,
         backgroundColor: Color(0xFF41775D),
         title: Image.asset('assets/images/Asset_15.png', height: 100, width: 100),
@@ -24,6 +27,7 @@ class MainListExample extends StatefulWidget {
 }
 
 class _MainListState extends State<MainListExample> {
+  final pageController = PageController(viewportFraction: 1.1);
   @override
   initState() {
     super.initState();
@@ -42,7 +46,6 @@ class _MainListState extends State<MainListExample> {
                   Instagram instagram = snapshot.data[index];
                   return Container(
                     // height: 100,
-                    // width: 400,
                     padding: EdgeInsets.fromLTRB(24, 23, 24, 23),
                     decoration: new BoxDecoration(
                         color: Colors.white,
@@ -60,9 +63,16 @@ class _MainListState extends State<MainListExample> {
                         Row(
                             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Image.asset('assets/images/${instagram.getDomain()}',
-                                  height: instagram.getDomainHeight(), width: instagram.getDomainWidth()),
-                              instagram.getTagWidget(),
+                              Expanded(
+                                child: Image.asset('assets/images/${instagram.getDomain()}', height: instagram.getDomainHeight(), width: instagram.getDomainWidth()),
+                              ),
+                              Expanded(
+                                child: SizedBox(width: 8),
+                              ),
+                              Expanded(
+                                flex: 10,
+                                child: instagram.getTagWidget(),
+                              ),
 
                               // TextButton(
                               //   child: Text('자세히'),
@@ -75,15 +85,51 @@ class _MainListState extends State<MainListExample> {
                               //   },
                               // )
                             ]),
-                        SizedBox(height: 30),
+                        SizedBox(height: 10),
+                            AspectRatio(
+                              aspectRatio: 1/1,
+                              child: PageView.builder(
+                                // controller: PageController(initialPage: instagram.pictures.length),
+                                controller: pageController,
+                                itemCount: instagram.pictures.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return FractionallySizedBox(
+                                    widthFactor: 1 / pageController.viewportFraction,
+                                    child: Image.network(
+                                      instagram.pictures[index].url,
+                                      fit: BoxFit.fitWidth,
+                                      alignment: FractionalOffset.topCenter,
+                                      //height: double.infinity,
+                                      //width: double.infinity,
+                                      //fit: BoxFit.fitWidth),
+                                    )
+                                  );
+                                  // return Center(
+                                  //   child: Image.network(
+                                  //     instagram.pictures[index].url,
+                                  //     fit: BoxFit.fitWidth,
+                                  //     alignment: FractionalOffset.topCenter,
+                                  //     //height: double.infinity,
+                                  //     //width: double.infinity,
+                                  //     //fit: BoxFit.fitWidth),
+                                  //
+                                  // ));
+                                },
+                              ),
+                            ),
+                        SizedBox(height: 10),
                         Text(
-                          '${snapshot.data[index].title}',
+                          instagram.getTitle(),
                           style: TextStyle(
                             fontSize: 16,
                             fontFamily: "AppleSD",
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 10),
+                        Text(
+                          instagram.getContent(),
+                        ),
                       ],
                     ),
                   );
