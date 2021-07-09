@@ -85,39 +85,29 @@ class _MainListState extends State<MainListExample> {
                               //   },
                               // )
                             ]),
-                        SizedBox(height: 10),
-                            AspectRatio(
-                              aspectRatio: 1/1,
-                              child: PageView.builder(
-                                // controller: PageController(initialPage: instagram.pictures.length),
-                                controller: pageController,
-                                itemCount: instagram.pictures.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return FractionallySizedBox(
-                                    widthFactor: 1 / pageController.viewportFraction,
-                                    child: Image.network(
-                                      instagram.pictures[index].url,
-                                      fit: BoxFit.fitWidth,
-                                      alignment: FractionalOffset.topCenter,
-                                      //height: double.infinity,
-                                      //width: double.infinity,
-                                      //fit: BoxFit.fitWidth),
-                                    )
-                                  );
-                                  // return Center(
-                                  //   child: Image.network(
-                                  //     instagram.pictures[index].url,
-                                  //     fit: BoxFit.fitWidth,
-                                  //     alignment: FractionalOffset.topCenter,
-                                  //     //height: double.infinity,
-                                  //     //width: double.infinity,
-                                  //     //fit: BoxFit.fitWidth),
-                                  //
-                                  // ));
-                                },
+                            SizedBox(height: 10),
+                            if (instagram.pictures.length > 0)
+                              AspectRatio(
+                                aspectRatio: 1/1,
+                                child: PageView.builder(
+                                  // controller: PageController(initialPage: instagram.pictures.length),
+                                  controller: pageController,
+                                  itemCount: instagram.pictures.length,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return FractionallySizedBox(
+                                      widthFactor: 1 / pageController.viewportFraction,
+                                      child: Image.network(
+                                        instagram.pictures[index].url,
+                                        fit: BoxFit.fitWidth,
+                                        alignment: FractionalOffset.topCenter,
+                                        //height: double.infinity,
+                                        //width: double.infinity,
+                                        //fit: BoxFit.fitWidth),
+                                      )
+                                    );
+                                  },
+                                ),
                               ),
-                            ),
-                        SizedBox(height: 10),
                         Text(
                           instagram.getTitle(),
                           style: TextStyle(
